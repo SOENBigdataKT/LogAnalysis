@@ -1,4 +1,4 @@
-package LogAnalysis.src.main.spark.java;
+#package LogAnalysis.src.main.spark.java;
 import LogAnalysis.src.main.spark.java.LabAssignment2Helper;
 
 /**
