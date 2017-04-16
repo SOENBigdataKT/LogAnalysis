@@ -1,4 +1,4 @@
-package LogAnalysis.src.main.spark.java;
+#package LogAnalysis.src.main.spark.java;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
