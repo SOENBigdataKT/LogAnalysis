@@ -1,4 +1,4 @@
-#package LogAnalysis.src.main.spark.java;
+//package LogAnalysis.Assignment2;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,11 +44,13 @@ public class LabAssignment2Helper {
 	public static JavaPairRDD<String, String> getCommonUsers(String inputDir1, String inputDir2) {
 		createSparkContext();
 		String hostFolderPath1 = inputDir1;
-		String foldername = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		//String foldername = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		String foldername = hostFolderPath1;
 		String hostName1=foldername;
 		
 		String hostFolderPath2 = inputDir2;
-		String foldername2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
+	//	String foldername2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
+		String foldername2 = hostFolderPath2;
 		String hostName2=foldername2;
 		
 		JavaRDD<String> logRDDIliad = sc.textFile(hostFolderPath1);
@@ -133,10 +135,12 @@ public class LabAssignment2Helper {
 		commonUsers.foreach(new VoidFunction<String>() {
 			public void call(String t) throws Exception {
 				// TODO Auto-generated method stub
-				System.out.println("\n"+"+"+":" +t+",");
+				System.out.println("\n"+ t);
+				//System.out.println("\n"+"+"+":" +t+",");
 				//System.out.println( "[("  + "'"+t+"'"+","+t + "])");
 			}
 		});
+		
 		endSparkContext();
 		return null;
 	}
@@ -144,14 +148,14 @@ public class LabAssignment2Helper {
 		createSparkContext();
 		
 		String hostFolderPath1 = inputDir1;
-		String hostName1 = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
-		
+		//String hostName1 = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		String hostName1 = hostFolderPath1;
 		JavaRDD<String> logRDDIliad = sc.textFile(hostFolderPath1);
 		host1 = new String(hostName1);
 		
 		String hostFolderPath2 = inputDir2;
-		String hostName2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
-		
+		//String hostName2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
+		String hostName2 = hostFolderPath2;
 		JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
 		//host2 = new String(hostName2);
 		
@@ -260,14 +264,14 @@ public class LabAssignment2Helper {
 
 		
 		String hostFolderPath1 = inputDir1;
-		String hostName1 = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
-		
+		//String hostName1 = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		String hostName1 = hostFolderPath1;
 		JavaRDD<String> logRDDIliad = sc.textFile(hostFolderPath1);
 		host1 = new String(hostName1);
 		
 		String hostFolderPath2 = inputDir2;
-		String hostName2= hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
-		
+		//String hostName2= hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
+		String hostName2= hostFolderPath2;
 		
 		JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
 		//host1 = new String(hostName1);
@@ -354,8 +358,8 @@ public class LabAssignment2Helper {
 		createSparkContext();
 		
 		String hostFolderPath1 = inputDir1;
-		String foldername = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
-		
+		//String foldername = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		String foldername = hostFolderPath1;
 		JavaRDD<String> logRDDIliad = sc.textFile(hostFolderPath1);
 		host1 = new String(foldername);
 		JavaRDD<String> set1LinesWithUsers = logRDDIliad.filter(new Function<String, Boolean>() {
@@ -406,8 +410,8 @@ public class LabAssignment2Helper {
 		//endSparkContext();
 		//
 			String hostFolderPath2 = inputDir2;
-			String foldername2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
-			
+			//String foldername2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
+			String foldername2=hostFolderPath2;
 			JavaRDD<String> logRDDIOdyssey = sc.textFile(hostFolderPath2);
 			host2 = new String(foldername2);
 			JavaRDD<String> set1LinesWithUsers2 = logRDDIOdyssey.filter(new Function<String, Boolean>() {
@@ -492,7 +496,7 @@ public static JavaPairRDD<String, String> getUniqueUserNames(String inputDir1, S
 		createSparkContext();
 		
 		String hostFolderPath1 = inputDir1;
-		//String foldername = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		
 		String hostFolderPath2 = inputDir2;
 	
 		JavaRDD<String> logRDDIllad = sc.textFile(hostFolderPath1);
@@ -599,21 +603,28 @@ public static List<String> getUsers(JavaRDD<String> sessionDetailRDD) {
 	
 	
 	
-	public JavaPairRDD<String, String> getTotalErrorMessages(String inputDir1, String inputDir2) {
+	public static JavaPairRDD<String, String> getTotalErrorMessages(String inputDir1, String inputDir2) {
 		createSparkContext();
-		String hostName1="iliad";
-	//	String hostName1="odyssey";
-		String hostFolderPath1 = "/home/akella/Desktop/Assignment/iliad";
+		
+		String hostFolderPath1 = inputDir1;
+		String hostFolderPath2 = inputDir2;
+		
+		String hostName1=hostFolderPath1;
 		
 		JavaRDD<String> logRDDIliad = sc.textFile(hostFolderPath1);
-	//	JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
+		
+		
+		JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
+		
+		
 		host1 = new String(hostName1);
 		JavaRDD<String> set1LinesWithUsers = logRDDIliad.filter(new Function<String, Boolean>() {
 			public Boolean call(String s) 
 			{ 
-				Pattern pattern = Pattern.compile("error", 
-		                Pattern.CASE_INSENSITIVE);
-				 Matcher matcher = pattern.matcher(s);
+				//Pattern pattern = Pattern.compile("error", 
+		                //Pattern.CASE_INSENSITIVE);
+				Pattern pattern = Pattern.compile("(?i:.*error:*)",Pattern.CASE_INSENSITIVE);
+		        Matcher matcher = pattern.matcher(s);
 
 				if(matcher.find())
 					return true;
@@ -633,11 +644,55 @@ public static List<String> getUsers(JavaRDD<String> sessionDetailRDD) {
 						return Integer.valueOf(value0.intValue() + value1.intValue());
 					}
 				});
-		System.out.println("Anomlysed log for Odyssey");
+		System.out.println("Q5: number of errors");
+		System.out.println("\n"+"+"+ hostName1 +":");
 		userSessionCount.foreach(new VoidFunction<Tuple2<String,Integer>>() {
 			public void call(Tuple2 t) throws Exception {
 				// TODO Auto-generated method stub
-				System.out.println(t._1+"-"+t._2);
+				
+				//System.out.println(t._1+"-"+t._2);
+				System.out.println(":"+ t._2);
+			}
+		});
+	//	endSparkContext();
+		
+		//createSparkContext();
+	//JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
+		
+		String hostName2=hostFolderPath2;
+		host2 = new String(hostName2);
+		JavaRDD<String> set1LinesWithUsers2 = logRDDOdyssey.filter(new Function<String, Boolean>() {
+			public Boolean call(String s) 
+			{ 
+				
+				Pattern pattern = Pattern.compile("(?i:.*error:*)",Pattern.CASE_INSENSITIVE);
+		        Matcher matcher = pattern.matcher(s);
+
+				if(matcher.find())
+					return true;
+				else
+					return false;
+			}
+		}).distinct();
+		JavaPairRDD<String, Integer> userSessionCount2 = set1LinesWithUsers2.mapToPair(
+				new PairFunction<String, String, Integer>(){
+					public Tuple2<String, Integer> call(String s) throws Exception {
+						// TODO Auto-generated method stub
+						return new Tuple2<String,Integer>(host2,1);
+					}
+				})
+				.reduceByKey(new Function2<Integer, Integer, Integer>() {
+					public Integer call(final Integer value0, final Integer value1) {
+						return Integer.valueOf(value0.intValue() + value1.intValue());
+					}
+				});
+	//	System.out.println("Q5: number of errors");
+		System.out.println("\n"+"+"+ hostName2 +":");
+		userSessionCount2.foreach(new VoidFunction<Tuple2<String,Integer>>() {
+			public void call(Tuple2 t1) throws Exception {
+				// TODO Auto-generated method stub
+				//System.out.println(t1._1+"-"+t1._2);
+				System.out.println(":"+ t1._2);
 			}
 		});
 		endSparkContext();
@@ -649,10 +704,10 @@ public static List<String> getUsers(JavaRDD<String> sessionDetailRDD) {
 		
 		createSparkContext();
 		String hostFolderPath1 = inputDir1;
-		String foldername = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		//String foldername = hostFolderPath1.substring(hostFolderPath1.lastIndexOf("/")+1);
+		String foldername=hostFolderPath1;
 		String hostName1=foldername;
 		System.out.println("Q6: 5 most frequent error messages");
-		
 
 		JavaRDD<String> logRDDIliad = sc.textFile(hostFolderPath1);
 	//	JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
@@ -702,7 +757,8 @@ public static List<String> getUsers(JavaRDD<String> sessionDetailRDD) {
 		createSparkContext();
 		
 		String hostFolderPath2 = inputDir2;
-		String foldername2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
+		String foldername2=hostFolderPath2;
+		//String foldername2 = hostFolderPath2.substring(hostFolderPath2.lastIndexOf("/")+1);
 		String hostName2=foldername2;
 		//System.out.println("Q6: 5 most frequent error messages");
 		
