@@ -1,2 +1,2 @@
 #!/bin/bash 
-java MainSparkClass "$@"
+java MainSparkClass "$2" "$3" "$4"
