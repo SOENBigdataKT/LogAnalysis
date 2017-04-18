@@ -1,5 +1,5 @@
-#package LogAnalysis.src.main.spark.java;
-import LogAnalysis.src.main.spark.java.LabAssignment2Helper;
+package LogAnalysis.Assignment2;
+import LogAnalysis.Assignment2.LabAssignment2Helper;
 
 /**
  * Main Spark program in Java which is a driver to all 9 questions
@@ -9,7 +9,7 @@ public class MainSparkClass {
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		
+		//String command;
 		int questionNumber=0;
 		String inputDir1;
 		String inputDir2;
@@ -61,8 +61,8 @@ public class MainSparkClass {
 					 
 				  new LabAssignment2Helper();
 				  
+				 // LabAssignment2Helper.getTotalErrorMessages(inputDir1, inputDir2);
 				  LabAssignment2Helper.getTotalErrMessages(inputDir1, inputDir2);
-				
 			  }
 			  
 			  //getTopErrorMessages
