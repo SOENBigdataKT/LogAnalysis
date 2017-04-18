@@ -33,7 +33,7 @@ Install and Run:
 
 5.  Execute the shell script as follows
 
-    ./log_analyzer -q <i> <dir1> <dir2>
+    ./log_analyzer -q  dir1 dir2
 
 
 Classification of Source files:
