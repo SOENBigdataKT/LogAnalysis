@@ -1,4 +1,4 @@
-//package LogAnalysis.Assignment2;
+package LogAnalysis.Assignment2;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +31,9 @@ public class LabAssignment2Helper {
 	public static void main(String[] args) {
 		Logger.getLogger("org").setLevel(Level.OFF);
 		Logger.getLogger("akka").setLevel(Level.OFF);
+System.out.println("Question 5");
+		
+		getTotalErrMessages("/home/akella/Desktop/Assignment/iliad","/home/akella/Desktop/Assignment/odyssey");
 	}
 
 	public static void createSparkContext() {
@@ -530,13 +533,13 @@ public static JavaPairRDD<String, String> getTotalErrMessages(String inputDir1, 
 	
 	long numAs = logRDDIllad.filter(new Function<String, Boolean>() {
 	      public Boolean call(String s) 
-	      { return s.contains("error"); 
+	      { return s.matches("(?i:.*error.*)"); 
 	      }
 	    }).count();
 	
 	long numBs = logRDDOdyssey.filter(new Function<String, Boolean>() {
 	      public Boolean call(String s) 
-	      { return s.contains("error"); 
+	      { return s.matches("(?i:.*error.*)");  
 	      }
 	    }).count();
 	
@@ -600,106 +603,7 @@ public static List<String> getUsers(JavaRDD<String> sessionDetailRDD) {
 		});
 		return sessionCount1;
 	}
-	
-	
-	
-	public static JavaPairRDD<String, String> getTotalErrorMessages(String inputDir1, String inputDir2) {
-		createSparkContext();
 		
-		String hostFolderPath1 = inputDir1;
-		String hostFolderPath2 = inputDir2;
-		
-		String hostName1=hostFolderPath1;
-		
-		JavaRDD<String> logRDDIliad = sc.textFile(hostFolderPath1);
-		
-		
-		JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
-		
-		
-		host1 = new String(hostName1);
-		JavaRDD<String> set1LinesWithUsers = logRDDIliad.filter(new Function<String, Boolean>() {
-			public Boolean call(String s) 
-			{ 
-				//Pattern pattern = Pattern.compile("error", 
-		                //Pattern.CASE_INSENSITIVE);
-				Pattern pattern = Pattern.compile("(?i:.*error:*)",Pattern.CASE_INSENSITIVE);
-		        Matcher matcher = pattern.matcher(s);
-
-				if(matcher.find())
-					return true;
-				else
-					return false;
-			}
-		}).distinct();
-		JavaPairRDD<String, Integer> userSessionCount = set1LinesWithUsers.mapToPair(
-				new PairFunction<String, String, Integer>(){
-					public Tuple2<String, Integer> call(String s) throws Exception {
-						// TODO Auto-generated method stub
-						return new Tuple2<String,Integer>(host1,1);
-					}
-				})
-				.reduceByKey(new Function2<Integer, Integer, Integer>() {
-					public Integer call(final Integer value0, final Integer value1) {
-						return Integer.valueOf(value0.intValue() + value1.intValue());
-					}
-				});
-		System.out.println("Q5: number of errors");
-		System.out.println("\n"+"+"+ hostName1 +":");
-		userSessionCount.foreach(new VoidFunction<Tuple2<String,Integer>>() {
-			public void call(Tuple2 t) throws Exception {
-				// TODO Auto-generated method stub
-				
-				//System.out.println(t._1+"-"+t._2);
-				System.out.println(":"+ t._2);
-			}
-		});
-	//	endSparkContext();
-		
-		//createSparkContext();
-	//JavaRDD<String> logRDDOdyssey = sc.textFile(hostFolderPath2);
-		
-		String hostName2=hostFolderPath2;
-		host2 = new String(hostName2);
-		JavaRDD<String> set1LinesWithUsers2 = logRDDOdyssey.filter(new Function<String, Boolean>() {
-			public Boolean call(String s) 
-			{ 
-				
-				Pattern pattern = Pattern.compile("(?i:.*error:*)",Pattern.CASE_INSENSITIVE);
-		        Matcher matcher = pattern.matcher(s);
-
-				if(matcher.find())
-					return true;
-				else
-					return false;
-			}
-		}).distinct();
-		JavaPairRDD<String, Integer> userSessionCount2 = set1LinesWithUsers2.mapToPair(
-				new PairFunction<String, String, Integer>(){
-					public Tuple2<String, Integer> call(String s) throws Exception {
-						// TODO Auto-generated method stub
-						return new Tuple2<String,Integer>(host2,1);
-					}
-				})
-				.reduceByKey(new Function2<Integer, Integer, Integer>() {
-					public Integer call(final Integer value0, final Integer value1) {
-						return Integer.valueOf(value0.intValue() + value1.intValue());
-					}
-				});
-	//	System.out.println("Q5: number of errors");
-		System.out.println("\n"+"+"+ hostName2 +":");
-		userSessionCount2.foreach(new VoidFunction<Tuple2<String,Integer>>() {
-			public void call(Tuple2 t1) throws Exception {
-				// TODO Auto-generated method stub
-				//System.out.println(t1._1+"-"+t1._2);
-				System.out.println(":"+ t1._2);
-			}
-		});
-		endSparkContext();
-		return null;
-	
-	}
-	
 	public static JavaPairRDD<String, String> getTopErrorMessages(String inputDir1, String inputDir2) {
 		
 		createSparkContext();
