@@ -18,7 +18,7 @@ import org.apache.spark.api.java.function.VoidFunction;
 import scala.Tuple2;
 
 /**
- * Helper Spark API in Java --Log Analysis
+ * Helper Spark API in Java --Log Analysis--Big_Data_Analytics course
  */
 public class LabAssignment2Helper {
 
